@@ -69,9 +69,7 @@ const sessionOptions = {
 };
 
 
-app.get("/",(req,res)=>{
-    res.send("Root is working");
-});
+
 
 
 
