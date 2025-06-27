@@ -1,0 +1,107 @@
+<% layout('layouts/boilerplate') %>
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+
+  .airbnb-theme {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 650px;
+    margin: 3rem auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .airbnb-heading {
+    color: #FF5A5F;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    font-weight: 500;
+  }
+
+  .btn-airbnb {
+    background-color: #FF5A5F;
+    color: white;
+    border: none;
+  }
+
+  .btn-airbnb:hover {
+    background-color: #e0484d;
+  }
+</style>
+
+<body>
+  <div class="airbnb-theme">
+    <h2 class="airbnb-heading">Edit Your Listing</h2>
+
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data">
+
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input name="listing[title]" id="title" value="<%= listing.title %>" type="text" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="listing[description]" id="description" rows="4" class="form-control" required><%= listing.description %></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price (in ₹)</label>
+        <input name="listing[price]" id="price" value="<%= listing.price %>" type="number" class="form-control" required />
+      </div>
+
+      <div class="mb-4">
+        Original Listing Image <br>
+        <img src="<%= originalImageUrl %>" alt="Old image" style="max-width: 300px; height: 250px;" />
+      </div>
+
+      <div class="mb-4">
+        <label for="imageUrl" class="form-label">Upload New Image</label>
+        <input type="file" name="listing[image]" id="imageUrl" class="form-control" />
+      </div>
+
+<div class="mb-3">
+  <label for="category" class="form-label">Category</label>
+  <select class="form-select" name="listing[category]" required>
+    <option value="">-- Select Category --</option>
+    <option value="Beach" <%= listing.category === 'Beach' ? 'selected' : '' %>>🏖️ Beach</option>
+    <option value="Mountain" <%= listing.category === 'Mountain' ? 'selected' : '' %>>⛰️ Mountain</option>
+    <option value="Village" <%= listing.category === 'Village' ? 'selected' : '' %>>🏘️ Village</option>
+    <option value="City" <%= listing.category === 'City' ? 'selected' : '' %>>🏙️ City</option>
+    <option value="Desert" <%= listing.category === 'Desert' ? 'selected' : '' %>>🏜️ Desert</option>
+    <option value="Lakefront" <%= listing.category === 'Lakefront' ? 'selected' : '' %>>🏞️ Lakefront</option>
+    <option value="Cabin" <%= listing.category === 'Cabin' ? 'selected' : '' %>>🏡 Cabin</option>
+    <option value="Camping" <%= listing.category === 'Camping' ? 'selected' : '' %>>⛺ Camping</option>
+    <option value="Forest" <%= listing.category === 'Forest' ? 'selected' : '' %>>🌲 Forest</option>
+    <option value="Boat" <%= listing.category === 'Boat' ? 'selected' : '' %>>⛵ Boat</option>
+    <option value="Countryside" <%= listing.category === 'Countryside' ? 'selected' : '' %>>🌄 Countryside</option>
+    <option value="Luxe" <%= listing.category === 'Luxe' ? 'selected' : '' %>>💎 Luxe</option>
+    <option value="Castle" <%= listing.category === 'Castle' ? 'selected' : '' %>>🏰 Castle</option>
+  </select>
+</div>
+
+
+
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input name="listing[country]" id="country" value="<%= listing.country %>" type="text" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input name="listing[location]" id="location" value="<%= listing.location %>" type="text" class="form-control" required />
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-airbnb">Update Listing</button>
+      </div>
+    </form>
+  </div>
+</body>

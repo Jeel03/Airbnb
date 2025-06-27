@@ -1,0 +1,162 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+
+  .airbnb-theme {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 650px;
+    margin: 3rem auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .airbnb-heading {
+    color: #FF5A5F;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    font-weight: 500;
+  }
+
+  .btn-airbnb {
+    background-color: #FF5A5F;
+    color: white;
+    border: none;
+  }
+
+  .btn-airbnb:hover {
+    background-color: #e0484d;
+  }
+
+  .is-invalid {
+    border-color: #dc3545;
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+</style>
+
+<body>
+  <div class="airbnb-theme">
+    <h2 class="airbnb-heading">Create a New Listing</h2>
+  
+  <form id="listingForm" method="POST" action="/listings" novalidate enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input name="listing[title]" id="title" type="text" class="form-control" required>
+    <div class="error-message" id="titleError"></div>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea name="listing[description]" id="description" rows="4" class="form-control" required></textarea>
+    <div class="error-message" id="descriptionError"></div>
+  </div>
+
+  <div class="mb-3">
+    <label for="price" class="form-label">Price (in ₹)</label>
+    <input name="listing[price]" id="price" type="number" class="form-control" required min="1">
+    <div class="error-message" id="priceError"></div>
+  </div>
+
+   <div class="mb-4">
+    <label for="imageUrl" class="form-label">Upload Image</label>
+    <input name="listing[image]" id="imageUrl" type="file" class="form-control" required>
+    <div class="error-message" id="imageUrlError"></div>
+  </div>
+
+<div class="mb-3">
+  <label for="category" class="form-label">Category</label>
+  <select class="form-select" name="listing[category]" required>
+    <option value="">-- Select Category --</option>
+    <option value="Beach">🏖️ Beach</option>
+    <option value="Mountain">⛰️ Mountain</option>
+    <option value="Village">🏘️ Village</option>
+    <option value="City">🏙️ City</option>
+    <option value="Desert">🏜️ Desert</option>
+    <option value="Lakefront">🏞️ Lakefront</option>
+    <option value="Cabin">🏡 Cabin</option>
+    <option value="Camping">⛺ Camping</option>
+    <option value="Forest">🌲 Forest</option>
+    <option value="Boat">⛵ Boat</option>
+    <option value="Countryside">🌄 Countryside</option>
+    <option value="Luxe">💎 Luxe</option>
+    <option value="Castle">🏰 Castle</option>
+  </select>
+</div>
+
+
+
+
+
+  <div class="mb-3">
+    <label for="country" class="form-label">Country</label>
+    <input name="listing[country]" id="country" type="text" class="form-control" required>
+    <div class="error-message" id="countryError"></div>
+  </div>
+
+  <div class="mb-3">
+    <label for="location" class="form-label">Location</label>
+    <input name="listing[location]" id="location" type="text" class="form-control" required>
+    <div class="error-message" id="locationError"></div>
+  </div>
+
+  <div class="d-grid">
+    <button type="submit" class="btn btn-airbnb">Add Listing</button>
+  </div>
+</form>
+  
+  
+  </div>
+
+ 
+<script>
+  const form = document.getElementById('listingForm');
+
+  const validators = {
+    title: value => value.trim().length < 3 ? 'Title must be at least 3 characters.' : '',
+    description: value => value.trim().length < 10 ? 'Description should be at least 10 characters.' : '',
+    price: value => value <= 0 ? 'Price must be a positive number.' : '',
+    country: value => /^[A-Za-z\s]+$/.test(value) ? '' : 'Country should contain only letters.',
+    location: value => /^[A-Za-z\s]+$/.test(value) ? '' : 'Location should contain only letters.',
+    imageUrl: () => {
+      const fileInput = document.getElementById("imageUrl");
+      return fileInput.files.length === 0 ? "Please upload an image." : "";
+    }
+  };
+
+  form.addEventListener('submit', function (e) {
+    let isValid = true;
+
+    Object.entries(validators).forEach(([field, validate]) => {
+      const input = document.getElementById(field);
+      const errorDiv = document.getElementById(field + 'Error');
+
+      const error = validate(input.value);
+      if (error) {
+        input.classList.add('is-invalid');
+        errorDiv.textContent = error;
+        isValid = false;
+      } else {
+        input.classList.remove('is-invalid');
+        errorDiv.textContent = '';
+      }
+    });
+
+    if (!isValid) e.preventDefault();
+  });
+</script>
+
+
+</body>

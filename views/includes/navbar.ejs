@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Airbnb Navbar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    .navbar {
+      background-color: white;
+      padding: 12px 24px;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo svg {
+      width: 32px;
+      height: 32px;
+      margin-right: 6px;
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 600;
+      color: #ff385c;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      color: #222;
+      padding: 8px 12px;
+      border-radius: 22px;
+      transition: background-color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background-color: #f7f7f7;
+    }
+
+    .search-container {
+      flex: 1;
+      max-width: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 40px;
+      padding: 6px 16px;
+      background-color: white;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      width: 100%;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 8px 10px;
+      font-size: 14px;
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+
+    .search-button {
+      background-color: #ff385c;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+
+    .search-icon {
+      width: 16px;
+      height: 16px;
+      fill: white;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-menu a {
+      text-decoration: none;
+      color: #222;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 22px;
+      transition: background-color 0.2s ease;
+    }
+
+    .user-menu a:hover {
+      background-color: #f7f7f7;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-container {
+        order: 2;
+        width: 100%;
+        margin: 12px 0;
+      }
+
+      .user-menu {
+        order: 3;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <!-- Left: Logo, Explore, Airbnb your home -->
+    <div class="left-section">
+      <a href="/listings" class="logo">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 1c2.008 0 3.463.963 4.751 3.269l.533 1.025c1.954 3.83 6.114 12.54 7.1 14.836l.145.353c.667 1.591.91 2.968.91 4.2 0 .403-.014.787-.042 1.158v.01C28.717 29.341 23.21 32 16 32S3.283 29.341 2.603 25.85v-.01A13.33 13.33 0 0 1 2.56 24.683c0-1.232.243-2.609.91-4.2l.145-.353c.986-2.297 5.146-11.006 7.1-14.836l.533-1.025C12.537 1.963 13.992 1 16 1zm0 4.013c-1.054 0-1.616.608-2.557 2.299l-.527 1.025c-1.851 3.64-5.766 11.851-6.668 13.87l-.138.33c-.552 1.325-.733 2.405-.733 3.246 0 .24.008.477.025.71C6.138 28.068 10.548 30 16 30s9.862-1.932 10.598-3.507c.017-.233.025-.47.025-.71 0-.841-.181-1.921-.733-3.246l-.138-.33c-.902-2.019-4.817-10.23-6.668-13.87l-.527-1.025C17.616 5.621 17.054 5.013 16 5.013zM16 12a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="#FF385C"/>
+        </svg>
+        <span class="logo-text">airbnb</span>
+      </a>
+
+      <a href="/listings" class="nav-link">Explore</a>
+      <a href="/listings/new" class="nav-link">Airbnb your home</a>
+    </div>
+
+    <!-- Center: Search Bar -->
+    <div class="search-container">
+      <form action="/listings/search" method="GET" class="search-box">
+        <input
+          type="text"
+          name="q"
+          value="<%= typeof q !== 'undefined' ? q : '' %>"
+          placeholder="Search title or location"
+        />
+        <button class="search-button" type="submit">
+          <svg class="search-icon" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Right: Auth Buttons -->
+    <div class="user-menu">
+      <% if (!currentUser) { %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Login</a>
+      <% } else { %>
+        <a href="/logout">Logout</a>
+      <% } %>
+    </div>
+  </nav>
+</body>
+</html>
