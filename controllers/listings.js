@@ -14,9 +14,8 @@ module.exports.index = async (req, res) => {
   }
 
   const categories = [
-    "Beach", "Mountain", "Village", "City", "Desert", 
-  "Lakefront", "Cabin", "Camping", "Treehouse", "Ski", 
-  "Igloo", "Castle", "Luxe", "Windmill", "Forest", "Cave"
+     "Beach", "Mountain", "Village", "City", "Desert", "Lakefront", "Cabin",
+    "Camping", "Forest", "Boat", "Countryside", "Luxe", "Castle"
   ];
 
   res.render("listings/index", { allListings, category, categories, q: "" });
@@ -65,9 +64,8 @@ module.exports.searchListings = async (req, res) => {
 
   // get all categories so category buttons still show
   const categories = [
-   "Beach", "Mountain", "Village", "City", "Desert", 
-  "Lakefront", "Cabin", "Camping", "Treehouse", "Ski", 
-  "Igloo", "Castle", "Luxe", "Windmill", "Forest", "Cave"
+   "Beach", "Mountain", "Village", "City", "Desert", "Lakefront", "Cabin",
+    "Camping", "Forest", "Boat", "Countryside", "Luxe", "Castle"
   ];
 
   res.render("listings/index", {
