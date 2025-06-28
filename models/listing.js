@@ -31,9 +31,8 @@ owner: {
 category: {
   type: String,
   enum: [
-  "Beach", "Mountain", "Village", "City", "Desert", 
-  "Lakefront", "Cabin", "Camping", "Treehouse", "Ski", 
-  "Igloo", "Castle", "Luxe", "Windmill", "Forest", "Cave"
+    "Beach", "Mountain", "Village", "City", "Desert", "Lakefront", "Cabin",
+    "Camping", "Forest", "Boat", "Countryside", "Luxe", "Castle"
 ],
   required: true,
 }
