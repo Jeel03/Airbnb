@@ -23,20 +23,38 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+// const dburl = process.env.ATLASDB_URL;
+
+
+
+// main()
+// .then(()=>{
+//     console.log("Connection succesfull");
+// })
+// .catch(err => console.log(err));
+
+// async function main() {
+//   await mongoose.connect(dburl);
+
+// }
+
+
+
+
 const dburl = process.env.ATLASDB_URL;
 
-
+async function main() {
+  await mongoose.connect(dburl, {
+    tls: true,
+    tlsAllowInvalidCertificates: true,
+    serverSelectionTimeoutMS: 5000,
+  });
+}
 
 main()
-.then(()=>{
-    console.log("Connection succesfull");
-})
-.catch(err => console.log(err));
+  .then(() => console.log("✅ MongoDB Connected Successfully"))
+  .catch(err => console.error("❌ MongoDB Connection Failed:", err));
 
-async function main() {
-  await mongoose.connect(dburl);
-
-}
 
 
 app.set("views",path.join(__dirname, "views"));
