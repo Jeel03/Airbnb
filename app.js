@@ -52,9 +52,10 @@ const store =MongoStore.create({
   touchAfter:24*3600,
 });
 
-store.on("error", ()=>{
-  console.log("ERROR in MONGO SESSION STORE",err);
+store.on("error", (err) => {
+  console.log("ERROR in MONGO SESSION STORE", err);
 });
+
 
 const sessionOptions = {
   store,
@@ -126,10 +127,17 @@ app.use("/", userRouter);
 // });
 
 // ✅ Error-handling middleware (this catches ExpressError and all other errors)
+
+
+// app.use((err, req, res, next) => {
+//   let { statusCode = 500, message = "Something went wrong" } = err;
+//   res.render("users/error", { err });
+// });
+
 app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "Something went wrong" } = err;
-  res.render("users/error", { err });
+  res.status(500).send(err.message || "Something went wrong");
 });
+
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
